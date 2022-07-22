@@ -8,6 +8,7 @@ import (
 	"lukmansjy/golang-restful-api/controller"
 	"lukmansjy/golang-restful-api/exception"
 	"lukmansjy/golang-restful-api/helper"
+	"lukmansjy/golang-restful-api/middleware"
 	"lukmansjy/golang-restful-api/repository"
 	"lukmansjy/golang-restful-api/service"
 	"net/http"
@@ -32,7 +33,7 @@ func main() {
 
 	server := http.Server{
 		Addr:    "localhost:3000",
-		Handler: router,
+		Handler: middleware.NewAuthMiddleware(router),
 	}
 
 	err := server.ListenAndServe()
